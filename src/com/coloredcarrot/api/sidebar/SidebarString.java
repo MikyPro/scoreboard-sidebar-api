@@ -76,17 +76,17 @@ public class SidebarString implements ConfigurationSerializable {
 		for (int i = 0; i <= text.length() - displayWidth; i++) {
 			String pre = text.substring(0, i);
 			String suff = text.substring(i, displayWidth + i);
-			if (suff.endsWith("ง")) {
+			if (suff.endsWith("ยง")) {
 				suff = suff.substring(0, suff.length() - 1);
 			}
-			if (pre.endsWith("ง")) {
+			if (pre.endsWith("ยง")) {
 				pre.substring(0, pre.length() - 1);
-				sidebarString.addVariation("ง" + suff);
+				sidebarString.addVariation("ยง" + suff);
 				continue;
 			}
 			String color = LongSidebar.getLastChatColor(pre);
 			sidebarString.addVariation(prefix + color + suff + suffix);
-			if (text.charAt(i) == 'ง') {
+			if (text.charAt(i) == 'ยง') {
 				i += 2;
 			} else if (text.charAt(i) == ' ') {
 				i++;
@@ -185,6 +185,26 @@ public class SidebarString implements ConfigurationSerializable {
 		curStep = step;
 
 	}
+	
+	/**
+	 * Constructs a new SidebarString. If setPlaceholdersForPlayer is not null,
+	 * the placeholders for the variations will be set.
+	 *
+	 * @param setPlaceholdersForPlayer
+	 *            (Player) - what player to set the placeholders for
+	 * @param variations
+	 *            (List<String>) - the variations (for animated text) (may be null)
+	 * @throws SidebarOptionalException
+	 *             if the PlaceholderAPI is not hooked.
+	 * @since 2.4
+	 */
+	public SidebarString(Player setPlaceholdersForPlayer, List<String> variations) throws SidebarOptionalException {
+
+		addVariationFromList(setPlaceholdersForPlayer, variations);
+
+		curStep = step;
+
+	}
 
 	/**
 	 * Constructs a new SidebarString. If setPlaceholdersForPlayer is not null,
@@ -242,24 +262,24 @@ public class SidebarString implements ConfigurationSerializable {
 	public SidebarString cleanVariations(Player p) {
 
 		// say this:
-		// "ง7hel"
+		// "ยง7hel"
 		// "7hell"
 		// "hello"
 		// "ello "
-		// "llo ง"
-		// "lo งc"
-		// "o งcg"
-		// " งcgu"
+		// "llo ยง"
+		// "lo ยงc"
+		// "o ยงcg"
+		// " ยงcgu"
 
 		List<String> newAnimated = new ArrayList<>();
 		boolean lastStartedWithColorChar = false;
 
 		for (String var : animated) {
 
-			if (var.startsWith("ง") && lastStartedWithColorChar) {
+			if (var.startsWith("ยง") && lastStartedWithColorChar) {
 				newAnimated.add(var);
 				lastStartedWithColorChar = true;
-			} else if (var.startsWith("ง"))
+			} else if (var.startsWith("ยง"))
 				lastStartedWithColorChar = true;
 			else if (lastStartedWithColorChar)
 				lastStartedWithColorChar = false;
@@ -335,17 +355,17 @@ public class SidebarString implements ConfigurationSerializable {
 	 */
 	public String getNextAndTrim(Logger logger, boolean isLongText) {
 		String next = getNext();
-		if (next.startsWith("งr") || next.startsWith("งf"))
+		if (next.startsWith("ยงr") || next.startsWith("ยงf"))
 			next = next.substring(2);
 
-		if (next.startsWith("งrงf") || next.startsWith("งfงr"))
+		if (next.startsWith("ยงrยงf") || next.startsWith("ยงfยงr"))
 			next = next.substring(4);
 		if (isLongText) {
 			if (next.length() > 64) {
 				logger.warning("[Sidebar] Entry variation #" + (i + 1) + " was trimmed to 64 characters (originally \""
 						+ next + "\")");
 				next = next.substring(0, 64);
-				if (next.endsWith("ง")) {
+				if (next.endsWith("ยง")) {
 					next = next.substring(0, 63);
 				}
 				animated.set(i - 1, next);
@@ -355,7 +375,7 @@ public class SidebarString implements ConfigurationSerializable {
 				logger.warning("[Sidebar] Entry variation #" + (i + 1) + " was trimmed to 28 characters (originally \""
 						+ next + "\")");
 				next = next.substring(0, 28);
-				if (next.endsWith("ง")) {
+				if (next.endsWith("ยง")) {
 					next = next.substring(0, 27);
 				}
 				animated.set(i - 1, next);
@@ -429,6 +449,18 @@ public class SidebarString implements ConfigurationSerializable {
 	 */
 	public SidebarString addVariation(String... variations) {
 		animated.addAll(Arrays.asList(variations));
+		return this;
+	}
+	
+	/**
+	 * Adds a variation.
+	 *
+	 * @param variations
+	 *            (List<String>) - the variations to add
+	 * @return (SidebarString) - this SidebarString Object, for chaining.
+	 */
+	public SidebarString addVariationFromList(List<String> variations) {
+		animated.addAll(variations);
 		return this;
 	}
 
