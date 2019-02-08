@@ -76,17 +76,30 @@ public class SidebarString implements ConfigurationSerializable {
 		for (int i = 0; i <= text.length() - displayWidth; i++) {
 			String pre = text.substring(0, i);
 			String suff = text.substring(i, displayWidth + i);
+<<<<<<< HEAD
 			if (suff.endsWith("ยง")) {
 				suff = suff.substring(0, suff.length() - 1);
 			}
 			if (pre.endsWith("ยง")) {
 				pre.substring(0, pre.length() - 1);
 				sidebarString.addVariation("ยง" + suff);
+=======
+			if (suff.endsWith("ง")) {
+				suff = suff.substring(0, suff.length() - 1);
+			}
+			if (pre.endsWith("ง")) {
+				pre.substring(0, pre.length() - 1);
+				sidebarString.addVariation("ง" + suff);
+>>>>>>> f33ba60... Little fixes.
 				continue;
 			}
 			String color = LongSidebar.getLastChatColor(pre);
 			sidebarString.addVariation(prefix + color + suff + suffix);
+<<<<<<< HEAD
 			if (text.charAt(i) == 'ยง') {
+=======
+			if (text.charAt(i) == 'ง') {
+>>>>>>> f33ba60... Little fixes.
 				i += 2;
 			} else if (text.charAt(i) == ' ') {
 				i++;
@@ -262,6 +275,7 @@ public class SidebarString implements ConfigurationSerializable {
 	public SidebarString cleanVariations(Player p) {
 
 		// say this:
+<<<<<<< HEAD
 		// "ยง7hel"
 		// "7hell"
 		// "hello"
@@ -270,16 +284,33 @@ public class SidebarString implements ConfigurationSerializable {
 		// "lo ยงc"
 		// "o ยงcg"
 		// " ยงcgu"
+=======
+		// "ง7hel"
+		// "7hell"
+		// "hello"
+		// "ello "
+		// "llo ง"
+		// "lo งc"
+		// "o งcg"
+		// " งcgu"
+>>>>>>> f33ba60... Little fixes.
 
 		List<String> newAnimated = new ArrayList<>();
 		boolean lastStartedWithColorChar = false;
 
 		for (String var : animated) {
 
+<<<<<<< HEAD
 			if (var.startsWith("ยง") && lastStartedWithColorChar) {
 				newAnimated.add(var);
 				lastStartedWithColorChar = true;
 			} else if (var.startsWith("ยง"))
+=======
+			if (var.startsWith("ง") && lastStartedWithColorChar) {
+				newAnimated.add(var);
+				lastStartedWithColorChar = true;
+			} else if (var.startsWith("ง"))
+>>>>>>> f33ba60... Little fixes.
 				lastStartedWithColorChar = true;
 			else if (lastStartedWithColorChar)
 				lastStartedWithColorChar = false;
@@ -355,17 +386,28 @@ public class SidebarString implements ConfigurationSerializable {
 	 */
 	public String getNextAndTrim(Logger logger, boolean isLongText) {
 		String next = getNext();
+<<<<<<< HEAD
 		if (next.startsWith("ยงr") || next.startsWith("ยงf"))
 			next = next.substring(2);
 
 		if (next.startsWith("ยงrยงf") || next.startsWith("ยงfยงr"))
+=======
+		if (next.startsWith("งr") || next.startsWith("งf"))
+			next = next.substring(2);
+
+		if (next.startsWith("งrงf") || next.startsWith("งfงr"))
+>>>>>>> f33ba60... Little fixes.
 			next = next.substring(4);
 		if (isLongText) {
 			if (next.length() > 64) {
 				logger.warning("[Sidebar] Entry variation #" + (i + 1) + " was trimmed to 64 characters (originally \""
 						+ next + "\")");
 				next = next.substring(0, 64);
+<<<<<<< HEAD
 				if (next.endsWith("ยง")) {
+=======
+				if (next.endsWith("ง")) {
+>>>>>>> f33ba60... Little fixes.
 					next = next.substring(0, 63);
 				}
 				animated.set(i - 1, next);
@@ -375,7 +417,11 @@ public class SidebarString implements ConfigurationSerializable {
 				logger.warning("[Sidebar] Entry variation #" + (i + 1) + " was trimmed to 28 characters (originally \""
 						+ next + "\")");
 				next = next.substring(0, 28);
+<<<<<<< HEAD
 				if (next.endsWith("ยง")) {
+=======
+				if (next.endsWith("ง")) {
+>>>>>>> f33ba60... Little fixes.
 					next = next.substring(0, 27);
 				}
 				animated.set(i - 1, next);
@@ -455,12 +501,33 @@ public class SidebarString implements ConfigurationSerializable {
 	/**
 	 * Adds a variation.
 	 *
+<<<<<<< HEAD
+=======
+	 *
+	 * @param setPlaceholdersForPlayer
+>>>>>>> f33ba60... Little fixes.
 	 * @param variations
 	 *            (List<String>) - the variations to add
 	 * @return (SidebarString) - this SidebarString Object, for chaining.
 	 */
+<<<<<<< HEAD
 	public SidebarString addVariationFromList(List<String> variations) {
 		animated.addAll(variations);
+=======
+	public SidebarString addVariationFromList(Player setPlaceholdersForPlayer, List<String> variations) {
+		if (setPlaceholdersForPlayer != null && SidebarAPI.getPlaceholderAPI() == null)
+			throw new SidebarOptionalException("PlaceholderAPI not hooked!");
+
+		if (variations != null && variations.size() > 0) {
+
+			if (setPlaceholdersForPlayer != null)
+				for (int i = 0; i < variations.size(); i++)
+					variations.set(i, PlaceholderAPI.setPlaceholders(setPlaceholdersForPlayer, variations.get(i)));
+
+			animated.addAll(variations);
+
+		}
+>>>>>>> f33ba60... Little fixes.
 		return this;
 	}
 

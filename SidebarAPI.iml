@@ -7,6 +7,18 @@
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
   </component>
+<<<<<<< HEAD
+=======
+  <component name="FacetManager">
+    <facet type="minecraft" name="Minecraft">
+      <configuration>
+        <autoDetectTypes>
+          <platformType>SPIGOT</platformType>
+        </autoDetectTypes>
+      </configuration>
+    </facet>
+  </component>
+>>>>>>> f33ba60... Little fixes.
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/bin" />
     <exclude-output />
@@ -35,5 +47,9 @@
         <SOURCES />
       </library>
     </orderEntry>
+<<<<<<< HEAD
+=======
+    <orderEntry type="library" name="Spigot-1.8" level="project" />
+>>>>>>> f33ba60... Little fixes.
   </component>
 </module>

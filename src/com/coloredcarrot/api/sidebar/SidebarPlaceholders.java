@@ -62,7 +62,11 @@ public class SidebarPlaceholders
             if (identifier.equals("title"))
             {
                 
+<<<<<<< HEAD
                 Sidebar sidebar = SidebarAPI.getSidebar(player);
+=======
+                Sidebars sidebar = SidebarAPI.getSidebar(player);
+>>>>>>> f33ba60... Little fixes.
                 
                 if (sidebar == null)
                     return "";
@@ -76,7 +80,11 @@ public class SidebarPlaceholders
                 
                 int line = Integer.valueOf(identifier.split("inenextvar_")[1]);
                 
+<<<<<<< HEAD
                 Sidebar sidebar = SidebarAPI.getSidebar(player);
+=======
+                Sidebar sidebar = (Sidebar) SidebarAPI.getSidebar(player);
+>>>>>>> f33ba60... Little fixes.
                 
                 if (sidebar == null)
                     return "";
@@ -91,7 +99,11 @@ public class SidebarPlaceholders
                 int line = Integer.valueOf(identifier.split("ine_")[1].split("_var_")[0]);
                 int var  = Integer.valueOf(identifier.split("_var_")[1]);
                 
+<<<<<<< HEAD
                 Sidebar sidebar = SidebarAPI.getSidebar(player);
+=======
+                Sidebars sidebar = SidebarAPI.getSidebar(player);
+>>>>>>> f33ba60... Little fixes.
                 
                 if (sidebar == null)
                     return "";
